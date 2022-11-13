@@ -1,0 +1,7 @@
+let yourArray  = 
+  [ 
+
+  null,false,"2",3,4
+  
+];
+; // Change this line
