@@ -1,0 +1,26 @@
+function palindrome(str) {
+
+    let tmpstring = str.replace(/[^a-zA-Z0-9]/g,"");//regex
+    let sameflag = 1;
+    let x=tmpstring.length;
+
+    tmpstring = tmpstring.toUpperCase();//bring whole string toUpper to check if same
+
+    for(let i=0; i < tmpstring.length; i++){
+      //var i going from left to right
+      //var x going from right to left
+      /*
+        for every letter in string 
+        check the same position from left and right
+      */
+      if(sameflag==1 && tmpstring[i] == tmpstring[x-1])
+        sameflag = 1;
+      else
+        sameflag = 0;
+      
+      x--; //
+    }
+    return (sameflag === 1) ? true:false //conditional logic operator
+}
+
+palindrome("eye");

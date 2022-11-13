@@ -1,0 +1,40 @@
+function palindrome(str) {
+
+let tmpstring = str.replace(/[^a-zA-Z0-9]/g,"");
+tmpstring = tmpstring.toUpperCase();
+
+console.log(tmpstring);
+
+
+
+    let sameflag = 1;
+    let x=tmpstring.length;
+
+    for(let i=0; i < tmpstring.length; i++){
+     // console.log(str[i],".1| i=", i);
+      
+      //console.log(str[x-1],".2| x =", x);
+      if(sameflag==1 && tmpstring[i] == tmpstring[x-1]){
+        sameflag = 1;
+      }
+      else{
+        sameflag = 0;
+        break;
+      }
+      x--;
+    }
+    if(sameflag){
+      console.log("-equal");
+      return true;
+    }
+    else{
+      return false;
+    }
+
+    
+
+  
+
+}
+
+palindrome("eye");

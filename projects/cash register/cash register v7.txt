@@ -1,0 +1,83 @@
+const currencyArray = 
+  {
+  "ONE HUNDRED":100,
+  "TWENTY":20,
+  "TEN":10,
+  "FIVE":5,
+  "ONE":1,
+  "QUARTER":0.25,
+  "DIME":0.1,
+  "NICKEL":0.05,
+  "PENNY":0.01,
+  }
+
+
+function checkCashRegister(price, cash, cid) {
+  var change = cash - price;
+  let changenum = change.valueOf();
+  let changeArr = [];
+  cid = cid.reverse();
+  const changeObj = {};
+  //console.log(reversedArr)
+  //console.log(currencyArray);
+  if(price == cash){
+    
+    changeObj.status = "CLOSED";
+  }
+  else if(price > cash){
+    changeObj.status = "INSUFFICIENT_FUNDS";
+  }
+  else{
+    
+    changeObj.status = "OPEN";
+    //console.log(cid);
+      for(let cidcurr in cid){
+        //console.log(cid[cidcurr][0],cid[cidcurr][1] , currencyArray[cid[cidcurr][0]],'\n');
+        let cidaval = cid[cidcurr][1] / currencyArray[cid[cidcurr][0]];
+      let tempcidival = cidaval.valueOf();
+      let tempchangefromdrawer = 0;
+        //console.log("бумажек сначала",cidaval);
+          while(currencyArray[cid[cidcurr][0]] <= changenum && cidaval > 0){
+          
+          if(tempcidival == cidaval){
+            
+            tempchangefromdrawer += currencyArray[cid[cidcurr][0]].valueOf();
+            changenum = parseFloat(changenum - currencyArray[cid[cidcurr][0]]).toFixed(6);
+            changeArr.push('[' + cid[cidcurr][0]);
+            cidaval--;
+          }
+          else {
+            changenum = parseFloat(changenum - currencyArray[cid[cidcurr][0]]).toFixed(6);
+            tempchangefromdrawer += currencyArray[cid[cidcurr][0]].valueOf();
+            //console.log(tempchangefromdrawer);
+            cidaval--;
+          
+            //console.log(changenum);
+          }
+
+          //console.log("бумажек осталось", cidaval)
+        
+
+      }
+      if(tempchangefromdrawer > 0.001)
+      changeArr.push(tempchangefromdrawer+']');
+      
+
+      
+      //console.log('\n')
+      }
+
+  }
+
+var newString    = changeArr.toString();
+var editedString = newString.replace(/''/g, "");
+editedString = changeArr;
+
+ 
+  changeObj.change =  changeArr  ;
+  
+  console.log(changeObj);
+  return changeObj;
+}
+
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);

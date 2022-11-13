@@ -1,0 +1,93 @@
+/*
+const romanArray = {
+  M:1000,
+  CM:900,
+  D:500,
+  CD:400,
+  C:100,
+  XC:90,
+  L:50,
+  XL:40,
+  X:10,
+  IX:9,
+  V:5,
+  IV:4,
+  I:1,
+}
+
+function convertToRoman(num) {
+  let numstring = "";
+  for(let key in romanArray){
+    
+    while(romanArray[key] <= num ){
+      num = num - romanArray[key];
+      numstring += key;
+    }
+
+  }
+ return numstring;
+}
+
+convertToRoman(2);
+*/ 
+const currencyArray = 
+  {
+  "ONE HUNDRED":100,
+  "TWENTY":20,
+  "TEN":10,
+  "FIVE":5,
+  "ONE":1,
+  "QUARTER":0.25,
+  "DIME":0.1,
+  "NICKEL":0.05,
+  "PENNY":0.01,
+  }
+
+
+function checkCashRegister(price, cash, cid) {
+  var change = cash - price;
+  let changenum = change.valueOf();
+  let changeArr = [];
+  cid = cid.reverse();
+  const changeObj = {};
+  //console.log(reversedArr)
+  //console.log(currencyArray);
+  if(price == cash){
+    
+    changeObj.status = "CLOSED";
+  }
+  else if(price > cash){
+    changeObj.status = "INSUFFICIENT_FUNDS";
+  }
+  else{
+    
+    changeObj.status = "OPEN";
+    //console.log(cid);
+      for(let cidcurr in cid){
+        console.log(cid[cidcurr][0],cid[cidcurr][1] , currencyArray[cid[cidcurr][0]],'\n');
+        let cidaval = cid[cidcurr][1] / currencyArray[cid[cidcurr][0]];
+        console.log("бумажек",cidaval);
+          while(currencyArray[cid[cidcurr][0]] <= changenum && cidaval > 0){
+          
+          changenum = changenum - currencyArray[cid[cidcurr][0]];
+          changeArr.push([cid[cidcurr][0],changenum]);
+          cidaval--;
+          console.log("cidival", cidaval)
+          
+        
+
+      }
+      console.log('\n')
+      }
+  }
+
+
+
+ 
+  changeObj.change =  changeArr  ;
+  
+  console.log(changeObj);
+  return changeObj;
+}
+
+checkCashRegister(19.4, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);

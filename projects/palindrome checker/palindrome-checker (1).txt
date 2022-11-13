@@ -1,0 +1,26 @@
+function palindrome(str) {
+
+let tmpstring = str.replace(/[^a-zA-Z0-9]/g,"");
+tmpstring = tmpstring.toUpperCase();
+
+
+    let sameflag = 1;
+    let x=tmpstring.length;
+
+    for(let i=0; i < tmpstring.length; i++){
+
+      if(sameflag==1 && tmpstring[i] == tmpstring[x-1])
+        sameflag = 1;
+      
+      else
+        sameflag = 0;
+      
+      x--;
+    }
+    return (sameflag === 1) ? true:
+           false
+            
+
+}
+
+palindrome("eye");

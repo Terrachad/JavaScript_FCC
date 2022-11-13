@@ -1,0 +1,88 @@
+ const currencyArray = 
+  {
+  "ONE HUNDRED":100,
+  "TWENTY":20,
+  "TEN":10,
+  "FIVE":5,
+  "ONE":1,
+  "QUARTER":0.25,
+  "DIME":0.1,
+  "NICKEL":0.05,
+  "PENNY":0.01,
+  }
+
+
+function checkCashRegister(price, cash, cid) {
+  var change = cash - price;
+  let changenum = change.valueOf();
+  let changeArr = [];
+  let joinArr = [];
+  cid = cid.reverse();
+  const changeObj = {
+    status:"",
+    change:'',
+  };
+
+  if(price == cash){
+    changeObj.status = "CLOSED";
+  }
+  else if(price > cash){
+    changeObj.status = "INSUFFICIENT_FUNDS";
+  }
+  else{
+    changeObj.status = "OPEN";
+    //console.log(cid);
+      for(let cidcurr in cid){//cidcurr is used as an index in the cid arr
+      
+        //console.log(cid[cidcurr][0],cid[cidcurr][1] , currencyArray[cid[cidcurr][0]],'\n');
+
+      let cidaval = cid[cidcurr][1] / currencyArray[cid[cidcurr][0]];//avalivable "papers or coins" per each 
+      let tempcidival = cidaval.valueOf();//exact copy of cidaval without mutation
+      let tempchangefromdrawer = 0;//calculate amount of money left after each key is passed into the function
+      
+          while(currencyArray[cid[cidcurr][0]] <= changenum && cidaval > 0){//check real "cost" of given coin or paper
+          
+          if(tempcidival == cidaval){ ///
+            
+            tempchangefromdrawer += currencyArray[cid[cidcurr][0]].valueOf();
+            changenum = parseFloat(changenum - currencyArray[cid[cidcurr][0]]).toFixed(6);
+            changeArr.push(cid[cidcurr][0]);
+            cidaval--;
+          }
+          else {
+            changenum = parseFloat(changenum - currencyArray[cid[cidcurr][0]]).toFixed(6);
+            tempchangefromdrawer += currencyArray[cid[cidcurr][0]].valueOf();
+            cidaval--;
+          
+          }
+
+        
+
+      }
+      if(tempchangefromdrawer > 0.00001)
+      changeArr.push(tempchangefromdrawer );
+      if(changeArr !== []){
+      joinArr.push(changeArr);
+
+      }
+      changeArr =[];
+      }
+
+      console.log(joinArr)
+
+  }
+
+
+
+
+
+ 
+  changeObj.change =  joinArr  ;
+
+
+  
+  console.log(changeObj);
+  return changeObj;
+}
+
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
