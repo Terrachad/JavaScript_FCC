@@ -1,0 +1,9 @@
+function booWho(bool) {
+  if(typeof bool === 'bool' | bool === true | bool === false){
+    return true;
+  }
+  else
+  return false;
+}
+
+booWho(null);

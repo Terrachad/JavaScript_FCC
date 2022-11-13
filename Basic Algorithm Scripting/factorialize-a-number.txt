@@ -1,0 +1,11 @@
+function factorialize(num) {
+  let tempnum = 1;
+  while(num > 0){
+    tempnum = num * tempnum;
+    console.log(num,tempnum);
+    num--;
+  }
+  return tempnum;
+}
+
+factorialize(5);

@@ -1,0 +1,13 @@
+function getIndexToIns(arr, num) {
+  var tmparr = new Float64Array(arr); //convert to typedArr
+  tmparr = tmparr.sort(); //sort a typed arr without func
+  let tmpcount = 0; 
+  for(let i=0; i < arr.length; i++){
+    arr[i] = tmparr[i]; //copy sorted values to the original array
+    if(arr[i] > tmpcount && arr[i] < num )//check the highest and closest to given var(num)
+      tmpcount = i+1; //index 0 = 1
+  }
+  return tmpcount;
+}
+
+getIndexToIns([40, 60], 50);
